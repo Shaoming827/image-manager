@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TextField, Button, Box } from '@mui/material';
 
 function downloadBase64Image(base64Data, setAssetUrl,fileName) {
   const byteCharacters = atob(base64Data);
@@ -30,7 +31,7 @@ function downloadBase64Image(base64Data, setAssetUrl,fileName) {
 }
 
 
-function Download() {
+function Download(api) {
   const [assetId, setAssetId] = useState('');
   const [assetUrl, setAssetUrl] = useState('');
 
@@ -40,7 +41,7 @@ function Download() {
 
   const handleDownload = async () => {
     try {
-      const apiUrl = `https://project-02-server-shaomingxu.cs-310-spring-2023.repl.co/download/${assetId}`;
+      const apiUrl = api+`/download/${assetId}`;
       const response = await fetch(apiUrl);
       const data = await response.json();
       console.log(data);
@@ -54,9 +55,20 @@ function Download() {
 
   return (
     <div>
-      <input type="text" value={assetId} onChange={handleInputChange} placeholder="Enter Asset ID" />
-      <button onClick={handleDownload}>Download Asset</button>
-
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <TextField
+          type="text"
+          value={assetId}
+          onChange={handleInputChange}
+          placeholder="Enter Asset ID"
+          variant="outlined"
+          sx={{ flex: 1, marginRight: '10px' }}
+        />
+        <Button variant="contained" color="primary" onClick={handleDownload}>
+          Download Asset
+        </Button>
+      </Box>
+      
       {assetUrl && (
         <div>
           <h3>Asset Preview</h3>

@@ -34,10 +34,12 @@ const Dashboard = () => {
   const [user_data, setUserData] = useState(null);
   const [asset_data, setAssetData] = useState(null);
   const [bucket, setBucket] = useState(null);
-
+  const baseURL = 'https://project-02-server-shaomingxu.cs-310-spring-2023.repl.co'; 
+  
   const handleClick = async () => {
+   
     try {
-      const baseURL = 'https://project-02-server-shaomingxu.cs-310-spring-2023.repl.co'; 
+     
       //overall info
       const overall_info = baseURL + '/stats'; 
       const response = await fetch(overall_info);
@@ -86,7 +88,7 @@ const Dashboard = () => {
         <Grid item xs={12}>
           <DashboardPaper>
             <h1>Download Image and Preivew</h1>
-            <Download></Download>
+            <Download api={baseURL}></Download>
           </DashboardPaper>
         </Grid>
         <Grid item xs={12} md={6}>
