@@ -7,13 +7,16 @@ const UploadImage = () => {
   const [uploadedImageId, setUploadedImageId] = useState(null);
   const [userID, setUserID] = useState(null);
   const [imageName, setImageName] = useState(null);
+  const [uploadContent, setUploadContent] = useState('Choose Image');
 
   const handleImageChange = (event) => {
+    //console.log(event.target.files);
     let file = event.target.files[0];
     let reader = new FileReader();
     setImageName(file.name);
     reader.onloadend = ()=>setSelectedImage(reader.result);
     reader.readAsDataURL(file);
+    setUploadContent("Uploaded");
   };
   const handleUserInputChange = (e) => {
     setUserID(e.target.value);
@@ -59,14 +62,16 @@ const UploadImage = () => {
       console.log('Error occurred while uploading image:', error);
     }
   };
-
+  
   return (
     <div>
-      <Button variant="outlined" onClick={handleImageChange} style={{display: 'block',width: '100%',height: '20em','margin-bottom': '10px' }} >
-
-        <CloudUploadIcon style={{ marginRight: '8px' }} />
-        <p >Choose Image</p>
-      </Button>
+      <label htmlFor="upload-button">
+        <Button variant="outlined" component="span" style={{ display: 'block', width: '100%', height: '20em', marginBottom: '10px' }}>
+          <CloudUploadIcon style={{ marginRight: '8px', width: '100%', height: '70%'}} />
+          <p id="image-content" style={{ 'text-align': 'center' }}>{uploadContent}</p>
+        </Button>
+        <input type="file" style={{ display: 'none' }} onChange={handleImageChange} accept="image/*" id="upload-button" />
+      </label>
      
       <Box display="flex" alignItems="center" width="100%">
         <TextField
@@ -104,6 +109,7 @@ export default UploadImage;
 //     const file = event.target.files[0];
 //     const reader = new FileReader();
 
+    
 //     reader.onloadend = () => {
 //       setImageName(file.name);
 //       setSelectedImage(reader.result);
@@ -133,8 +139,9 @@ export default UploadImage;
 //         assetname: imageName,
 //         data: parsedImageEncoding[1]
 //       };
+     
 //       const body = JSON.stringify(data);
-
+//       console.log(body);
 //       const response = await fetch(url, {
 //         method: 'POST',
 //         headers: {

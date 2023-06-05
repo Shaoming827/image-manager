@@ -34,8 +34,8 @@ const Dashboard = () => {
   const [user_data, setUserData] = useState(null);
   const [asset_data, setAssetData] = useState(null);
   const [bucket, setBucket] = useState(null);
-  const baseURL = 'https://project-02-server-shaomingxu.cs-310-spring-2023.repl.co'; 
-  
+  const baseURL = 'https://project-02-server-zeratul1215.cs-310-spring-2023.repl.co'; 
+
   const handleClick = async () => {
    
     try {
