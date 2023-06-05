@@ -26,13 +26,12 @@ export default function AuthForm(props) {
           baseURL+`/signin/${email}`
         );
         // Handle the response accordingly
-        if (response.data.success) {
+        if (response.status === 200) {
           // Navigate to the dashboard page
           navigate("/dashboard");
         } else {
           setError("Invalid email or password");
         }
-        navigate("/dashboard");
       } else {
         const { v4: uuidv4 } = require('uuid');
         const bucketfolder = uuidv4();
@@ -45,7 +44,7 @@ export default function AuthForm(props) {
         );
 
         // Handle the response accordingly
-        if (response.data.success) {
+        if (response.status === 200) {
           // Navigate to the dashboard page
           navigate("/dashboard");
         } else {
