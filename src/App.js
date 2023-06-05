@@ -1,10 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-import Dashboard from './dashboard';
+import "bootstrap/dist/css/bootstrap.min.css"
+import "./App.css"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Auth from "./auth"
+import Dashboard from "./dashboard";
 
 function App() {
   return (
-    <Dashboard />)  
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Auth />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
