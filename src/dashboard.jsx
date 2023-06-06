@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, Paper, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Container, Grid, Paper, Button, TableContainer } from '@mui/material';
 import { styled } from '@mui/system';
 import UploadImage from './components/UploadImage';
 import Stats from './components/Stats';
@@ -7,6 +7,7 @@ import Assets from './components/Assets';
 import Users from './components/Users';
 import Bucket from './components/Bucket';
 import Download from './components/Download';
+import Nearby from './components/Nearby';
 
 const DashboardContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(4),
@@ -77,6 +78,12 @@ const Dashboard = () => {
           <DashboardPaper>
             <h1>Welcome to your Image Manager</h1>
             <DashboardButton variant="contained" onClick={handleClick}>Update</DashboardButton>
+          </DashboardPaper>
+        </Grid>
+        <Grid item xs={12}>
+          <DashboardPaper>
+            <h1>Search nearby Image</h1>
+            <Nearby></Nearby>
           </DashboardPaper>
         </Grid>
         <Grid item xs={12}>

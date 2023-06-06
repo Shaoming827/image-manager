@@ -8,7 +8,7 @@ function downloadBase64Image(base64Data, setAssetUrl,fileName) {
     byteArrays.push(byteCharacters.charCodeAt(i));
   }
   const byteArray = new Uint8Array(byteArrays);
-  const blob = new Blob([byteArray], { type: 'image/png' });
+  const blob = new Blob([byteArray], { type: 'image/jpg' });
   const url = URL.createObjectURL(blob);
   console.log("Blog ready,start preview")
   //preview
@@ -41,12 +41,16 @@ function Download(api) {
 
   const handleDownload = async () => {
     try {
-      const apiUrl = api+`/download/${assetId}`;
+      // console.log(api)
+
+      const apiUrl = api.api+`/download/${assetId}`;
+      // console.log(apiUrl);
       const response = await fetch(apiUrl);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       const image_encoding = data.data;
       const image_name = data.asset_name;
+      console.log(image_encoding)
       downloadBase64Image(image_encoding, setAssetUrl,image_name);
     } catch (error) {
       console.error('API call failed:', error);
