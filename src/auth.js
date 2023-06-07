@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { MD5 } from "crypto-js";
 import Dashboard from "./dashboard";
 
 export default function AuthForm(props) {
   const [authMode, setAuthMode] = useState("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [hashedPassword, setHashedPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
@@ -16,14 +18,23 @@ export default function AuthForm(props) {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
   };
 
+  const handlePasswordChange = (e) => {
+    const enteredPassword = e;
+    setPassword(enteredPassword);
+    const md5Hash = MD5(enteredPassword).toString();
+    setHashedPassword(md5Hash);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const baseURL = 'https://project-02-server-yzying.cs-310-spring-2023.repl.co';
 
     try {
       if (authMode === "signin") {
-        const response = await axios.get(
-          baseURL+`/signin/${email}`
+        const response = await axios.post(baseURL+`/signin`, {
+              "email": email,
+              "password": hashedPassword,
+            }
         );
         // Handle the response accordingly
         if (response.status === 200) {
@@ -36,10 +47,11 @@ export default function AuthForm(props) {
         const { v4: uuidv4 } = require('uuid');
         const bucketfolder = uuidv4();
         console.log(bucketfolder);
-        const response = await axios.put('https://project-02-server-yzying.cs-310-spring-2023.repl.co/user', {
+        const response = await axios.put(baseURL+'/user', {
           "email": email,
           "firstname": firstName,
           "lastname": lastName,
+          "password": hashedPassword,
           "bucketfolder": bucketfolder}
         );
 
@@ -55,6 +67,7 @@ export default function AuthForm(props) {
       // Clear form inputs and any error messages
       setEmail("");
       setPassword("");
+      setHashedPassword("");
       setFirstName("");
       setLastName("");
       setError("");
@@ -125,7 +138,7 @@ export default function AuthForm(props) {
               className="form-control mt-1"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handlePasswordChange(e.target.value)}
             />
           </div>
           <div className="d-grid gap-2 mt-3">
