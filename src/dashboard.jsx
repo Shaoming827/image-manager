@@ -44,7 +44,13 @@ const Dashboard = () => {
   const searchParams = new URLSearchParams(location.search);
   const cur_userid = searchParams.get('param'); 
   
-
+  const handleClickAssetId = async() => {
+      const get_asset = baseURL + `/assets/${cur_userid}`; 
+      const get_asset_response = await fetch(get_asset);
+      const assets_data = await get_asset_response.json();
+      setAssetData(assets_data);
+      console.log("Asset info complete");
+  }
   const handleClick = async () => {
    
     try {
@@ -94,10 +100,12 @@ const Dashboard = () => {
             <Nearby></Nearby>
           </DashboardPaper>
         </Grid>
+        
         <Grid item xs={12}>
           <DashboardPaper>
-            <h1>Upload Image</h1>
-            <UploadImage userid = {cur_userid}></UploadImage>
+            <h2 style={{display:'inline-block'}}>Assets Information</h2>
+            <DashboardButton variant="contained" onClick={handleClickAssetId} sx={{float:'right'}}>Get Asset ID</DashboardButton>
+            <Assets input ={asset_data}></Assets>
           </DashboardPaper>
         </Grid>
         <Grid item xs={12}>
@@ -106,18 +114,19 @@ const Dashboard = () => {
             <Download userid = {cur_userid}></Download>
           </DashboardPaper>
         </Grid>
+        <Grid item xs={12}>
+          <DashboardPaper>
+            <h1>Upload Image</h1>
+            <UploadImage userid = {cur_userid}></UploadImage>
+          </DashboardPaper>
+        </Grid>
         {/* <Grid item xs={12} md={6}>
           <DashboardPaper>
             <h2>Users Information</h2>
             <Users className=".dashboard-container" input = {user_data}></Users>
           </DashboardPaper>
         </Grid> */}
-        {/* <Grid item xs={12} md={6}>
-          <DashboardPaper>
-            <h2>Assets Information</h2>
-            <Assets input ={asset_data}></Assets>
-          </DashboardPaper>
-        </Grid> */}
+        
         {/* <Grid item xs={12} sm={6} md={4}>
           <DashboardPaper>
             <h2>Overall Information</h2>

@@ -41,9 +41,9 @@ export default function AuthForm(props) {
         if (response.status === 200) {
           // Navigate to the dashboard page
           //navigate("/dashboard");
-           //console.log(response.data[0]);
+          console.log(response.data.data[0].userid);
           
-          navigate('/dashboard?param=' + response.data.userid);
+          navigate('/dashboard?param=' + response.data.data[0].userid);
         } else {
           setError("Invalid email or password");
         }

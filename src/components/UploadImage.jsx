@@ -18,6 +18,7 @@ const UploadImage = ({userid}) => {
     reader.onloadend = () => {
       setImageName(file.name);
       setSelectedImage(reader.result);
+      console.log(reader.result);
     };
 
     if (file) {
@@ -44,7 +45,7 @@ const UploadImage = ({userid}) => {
         assetname: imageName,
         data: parsedImageEncoding[1]
       };
-     
+      console.log(data);
       const body = JSON.stringify(data);
       //console.log(body);
       const response = await fetch(url, {
@@ -58,7 +59,7 @@ const UploadImage = ({userid}) => {
       const responseData = await response.json();
       const message = responseData.message;
       const assetid = responseData.assetid;
-      console.log(responseData);
+      //console.log(responseData);
       if (message === 'success') {
         setUploadedImageId(assetid);
         alert('Image uploaded successfully!');
