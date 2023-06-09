@@ -25,9 +25,9 @@ export default function AuthForm(props) {
     setHashedPassword(md5Hash);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event, setter) => {
     event.preventDefault();
-    const baseURL = 'https://project-02-server-yzying.cs-310-spring-2023.repl.co';
+    const baseURL = 'https://zg48d06yji.execute-api.us-east-2.amazonaws.com/awsAvenger';
 
     try {
       if (authMode === "signin") {
@@ -47,7 +47,7 @@ export default function AuthForm(props) {
         const { v4: uuidv4 } = require('uuid');
         const bucketfolder = uuidv4();
         console.log(bucketfolder);
-        const response = await axios.put(baseURL+'/user', {
+        const response = await axios.post(baseURL+'/user', {
           "email": email,
           "firstname": firstName,
           "lastname": lastName,

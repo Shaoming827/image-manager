@@ -20,7 +20,7 @@ function Nearby() {
   
   const handleSubmit = async () => {
     try {
-      const url = `https://project-02-server-zeratul1215.cs-310-spring-2023.repl.co/nearPic?description=${encodeURIComponent(description)}&dist=${encodeURIComponent(dist)}`;
+      const url = `https://zg48d06yji.execute-api.us-east-2.amazonaws.com/awsAvenger/nearpic/${encodeURIComponent(description)}/${encodeURIComponent(dist)}`;
       const response = await fetch(url);
       const data = await response.json();
       const status = data.message;
@@ -59,6 +59,10 @@ function Nearby() {
       <br />
       <button onClick={handleSubmit}>Submit</button>
       <br />
+      {console.log("Success response")}
+      {pics.length == 0 && (
+        <p>Nothing Found</p>
+      )}
       {pics.length > 0 && (
         <div sx={{display:'block'}}> 
        <Box sx={{display:'flex', alignItems: 'center'}}>

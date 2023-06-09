@@ -35,7 +35,7 @@ const Dashboard = () => {
   const [user_data, setUserData] = useState(null);
   const [asset_data, setAssetData] = useState(null);
   const [bucket, setBucket] = useState(null);
-  const baseURL = 'https://project-02-server-zeratul1215.cs-310-spring-2023.repl.co'; 
+  const baseURL = 'https://zg48d06yji.execute-api.us-east-2.amazonaws.com/awsAvenger'; 
 
   const handleClick = async () => {
    
@@ -77,7 +77,7 @@ const Dashboard = () => {
         <Grid item xs={12}>
           <DashboardPaper>
             <h1>Welcome to your Image Manager</h1>
-            <DashboardButton variant="contained" onClick={handleClick}>Update</DashboardButton>
+            {/* <DashboardButton variant="contained" onClick={handleClick}>Update</DashboardButton> */}
           </DashboardPaper>
         </Grid>
         <Grid item xs={12}>
@@ -98,30 +98,30 @@ const Dashboard = () => {
             <Download api={baseURL}></Download>
           </DashboardPaper>
         </Grid>
-        <Grid item xs={12} md={6}>
+        {/* <Grid item xs={12} md={6}>
           <DashboardPaper>
             <h2>Users Information</h2>
             <Users className=".dashboard-container" input = {user_data}></Users>
           </DashboardPaper>
-        </Grid>
-        <Grid item xs={12} md={6}>
+        </Grid> */}
+        {/* <Grid item xs={12} md={6}>
           <DashboardPaper>
             <h2>Assets Information</h2>
             <Assets input ={asset_data}></Assets>
           </DashboardPaper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        </Grid> */}
+        {/* <Grid item xs={12} sm={6} md={4}>
           <DashboardPaper>
             <h2>Overall Information</h2>
             <Stats input={stats}></Stats>
           </DashboardPaper>
-        </Grid>
-        <Grid item xs={12} md={8}>
+        </Grid> */}
+        {/* <Grid item xs={12} md={8}>
           <DashboardPaper>
             <h2>Bucket Information</h2>
             <Bucket input={bucket}></Bucket>
           </DashboardPaper>
-        </Grid>
+        </Grid> */}
       </Grid>
     </DashboardContainer>
   );

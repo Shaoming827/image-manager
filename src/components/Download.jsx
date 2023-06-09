@@ -31,7 +31,7 @@ function downloadBase64Image(base64Data, setAssetUrl,fileName) {
 }
 
 
-function Download(api) {
+function Download(api, userid) {
   const [assetId, setAssetId] = useState('');
   const [assetUrl, setAssetUrl] = useState('');
 
@@ -39,11 +39,11 @@ function Download(api) {
     setAssetId(e.target.value);
   };
 
-  const handleDownload = async () => {
+  const handleDownload = async (userid) => {
     try {
       // console.log(api)
 
-      const apiUrl = api.api+`/download/${assetId}`;
+      const apiUrl = api.api+`/download/${assetId}/${userid}`;
       // console.log(apiUrl);
       const response = await fetch(apiUrl);
       const data = await response.json();
