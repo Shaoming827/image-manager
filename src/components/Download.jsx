@@ -31,19 +31,21 @@ function downloadBase64Image(base64Data, setAssetUrl,fileName) {
 }
 
 
-function Download(api, userid) {
+function Download({userid}) {
   const [assetId, setAssetId] = useState('');
   const [assetUrl, setAssetUrl] = useState('');
+  
+  console.log(userid);
 
   const handleInputChange = (e) => {
     setAssetId(e.target.value);
   };
 
-  const handleDownload = async (userid) => {
+  const handleDownload = async () => {
     try {
       // console.log(api)
 
-      const apiUrl = api.api+`/download/${assetId}/${userid}`;
+      const apiUrl = `https://zg48d06yji.execute-api.us-east-2.amazonaws.com/awsAvenger/download/${assetId}/${userid}`;
       // console.log(apiUrl);
       const response = await fetch(apiUrl);
       const data = await response.json();

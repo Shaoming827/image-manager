@@ -13,6 +13,7 @@ export default function AuthForm(props) {
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
@@ -25,7 +26,7 @@ export default function AuthForm(props) {
     setHashedPassword(md5Hash);
   };
 
-  const handleSubmit = async (event, setter) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const baseURL = 'https://zg48d06yji.execute-api.us-east-2.amazonaws.com/awsAvenger';
 
@@ -39,7 +40,10 @@ export default function AuthForm(props) {
         // Handle the response accordingly
         if (response.status === 200) {
           // Navigate to the dashboard page
-          navigate("/dashboard");
+          //navigate("/dashboard");
+           //console.log(response.data[0]);
+          
+          navigate('/dashboard?param=' + response.data.userid);
         } else {
           setError("Invalid email or password");
         }
@@ -58,7 +62,11 @@ export default function AuthForm(props) {
         // Handle the response accordingly
         if (response.status === 200) {
           // Navigate to the dashboard page
-          navigate("/dashboard");
+          
+          // console.log(response.data.userid);
+          //navigate("/dashboard");
+          
+          navigate('/dashboard?param=' + response.data.userid);
         } else {
           setError("Signup failed. Please try again.");
         }

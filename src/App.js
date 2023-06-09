@@ -6,12 +6,12 @@ import Dashboard from "./dashboard";
 import React, { useState } from 'react';
 
 function App() {
-  const [userid, setUserId] = useState(''); 
+  
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Auth setter={setUserId} />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Auth/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </BrowserRouter>
   )

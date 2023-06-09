@@ -8,6 +8,7 @@ import Users from './components/Users';
 import Bucket from './components/Bucket';
 import Download from './components/Download';
 import Nearby from './components/Nearby';
+import { useLocation } from 'react-router-dom';
 
 const DashboardContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(4),
@@ -36,6 +37,13 @@ const Dashboard = () => {
   const [asset_data, setAssetData] = useState(null);
   const [bucket, setBucket] = useState(null);
   const baseURL = 'https://zg48d06yji.execute-api.us-east-2.amazonaws.com/awsAvenger'; 
+  // const baseURL = 'https://project-02-server-shaomingxu.cs-310-spring-2023.repl.co';
+  //get user id 
+  
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const cur_userid = searchParams.get('param'); 
+  
 
   const handleClick = async () => {
    
@@ -89,13 +97,13 @@ const Dashboard = () => {
         <Grid item xs={12}>
           <DashboardPaper>
             <h1>Upload Image</h1>
-            <UploadImage></UploadImage>
+            <UploadImage userid = {cur_userid}></UploadImage>
           </DashboardPaper>
         </Grid>
         <Grid item xs={12}>
           <DashboardPaper>
             <h1>Download Image and Preivew</h1>
-            <Download api={baseURL}></Download>
+            <Download userid = {cur_userid}></Download>
           </DashboardPaper>
         </Grid>
         {/* <Grid item xs={12} md={6}>

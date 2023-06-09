@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
-import { Container, Grid, Paper, Button, TableContainer,Box, IconButton  } from '@mui/material';
+import { ArrowBack, ArrowForward} from '@mui/icons-material';
+import { Container, Grid, Paper, Button, TableContainer,Box, IconButton,TextField  } from '@mui/material';
 import { styled } from '@mui/system';
 
 function Nearby() {
@@ -21,11 +21,13 @@ function Nearby() {
   const handleSubmit = async () => {
     try {
       const url = `https://zg48d06yji.execute-api.us-east-2.amazonaws.com/awsAvenger/nearpic/${encodeURIComponent(description)}/${encodeURIComponent(dist)}`;
+      // console.log(url);
       const response = await fetch(url);
       const data = await response.json();
+      // console.log(data);
       const status = data.message;
       const pics = data.Pic;
-      if (status !== "success") {
+      if (status !== "Success") {
         setPics(["Error: something wrong!"]);
       } else {
         const pic_url = []
@@ -51,17 +53,29 @@ function Nearby() {
 
   return (
     <div>
-      <label htmlFor="description">Description: </label>
-      <input type="text" id="description" value={description} onChange={handleDescriptionChange} />
+      <TextField
+          type="text"
+          value={description}
+          onChange={handleDescriptionChange}
+          label="description"
+          variant="outlined"
+          sx={{ width: '40%' }}
+        />
+        <TextField
+          type="text"
+          value={dist}
+          onChange={handleDistChange}
+          label="dist"
+          variant="outlined"
+          sx={{ width: '20%' }}
+        />
+      <Button variant="outlined" onClick={handleSubmit}>
+        Submit
+      </Button>
+     
       <br />
-      <label htmlFor="dist">Distance: </label>
-      <input type="text" id="dist" value={dist} onChange={handleDistChange} />
-      <br />
-      <button onClick={handleSubmit}>Submit</button>
-      <br />
-      {console.log("Success response")}
       {pics.length == 0 && (
-        <p>Nothing Found</p>
+        <p sx = {{'text-align': 'center'}}>Nothing here</p>
       )}
       {pics.length > 0 && (
         <div sx={{display:'block'}}> 
